@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:photoApp="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.marcoaliasketaz.photoapp.MainActivity">
+    <!--<item android:id="@+id/action_settings"-->
+        <!--android:title="@string/action_settings"-->
+        <!--android:orderInCategory="100" -->
+        <!--app:showAsAction="never" />-->
+
+    <item android:id="@+id/action_galerie"
+        android:icon="@drawable/gallerie"
+        android:title="@string/afficherGalerie"
+        photoApp:showAsAction="always"/>
+
+    <item android:id="@+id/action_photo"
+        android:icon="@drawable/camera"
+        android:title="@string/prendrephoto"
+        photoApp:showAsAction="always"/>
+</menu>

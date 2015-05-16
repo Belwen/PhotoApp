@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:photoApp="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.marcoaliasketaz.photoapp.ContainerActivity">
+
+    <item android:id="@+id/action_carte"
+        android:icon="@drawable/marker"
+        android:title="@string/affichercarte"
+        photoApp:showAsAction="always"/>
+
+    <item android:id="@+id/action_galerie"
+        android:icon="@drawable/gallerie"
+        android:title="@string/afficherGalerie"
+        photoApp:showAsAction="always"/>
+
+    <item android:id="@+id/action_photo"
+        android:icon="@drawable/camera"
+        android:title="@string/prendrephoto"
+        photoApp:showAsAction="always"/>
+
+</menu>
