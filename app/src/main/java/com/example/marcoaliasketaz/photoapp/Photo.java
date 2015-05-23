@@ -1,12 +1,6 @@
 package com.example.marcoaliasketaz.photoapp;
-
-import android.net.Uri;
-
 import java.util.Date;
 
-/**
- * Created by Baruite on 20/04/2015.
- */
 public class Photo {
     private String _libelle, _commentaires,_photouri;
     private Date _date;
@@ -25,6 +19,9 @@ public class Photo {
 
     }
 
+    public void set_libelle(String libelle){_libelle=libelle;}
+    public void set_commentaires(String commentaires){_commentaires=commentaires;}
+
     public double get_latitude(){return _latitude; }
     public double get_longitude(){return _longitude; }
     public double get_orientation(){return _orientation; }
@@ -33,4 +30,6 @@ public class Photo {
     public String get_commentaires(){return _commentaires; }
     public String get_photouri(){return _photouri; }
     public int get_id(){return _id; }
+
+
 }

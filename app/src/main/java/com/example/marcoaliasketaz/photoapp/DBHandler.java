@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Baruite on 20/04/2015.
- */
+
 public class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 3;
@@ -59,7 +57,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createPhoto(Photo photo){
+    public int createPhoto(Photo photo){
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -71,8 +69,9 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_LIBELLE,photo.get_libelle());
         values.put(KEY_COMMENTAIRES,photo.get_commentaires());
         values.put(KEY_PHOTOURI,photo.get_photouri());
-        db.insert(TABLE_PHOTO, null, values);
+       long id= db.insert(TABLE_PHOTO, null, values);
         db.close();
+        return (int)id;
     }
 
     public List<Photo> getAllPhotos(){
@@ -104,6 +103,22 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return photo;
+    }
+
+    public int updatePhoto(Photo photo){
+        SQLiteDatabase db= getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+
+        values.put(KEY_LATITUDE,photo.get_latitude());
+        values.put(KEY_LONGITUDE,photo.get_longitude());
+        values.put(KEY_ORIENTATION,photo.get_orientation());
+        values.put(KEY_DATE,photo.get_date().toString());
+        values.put(KEY_LIBELLE,photo.get_libelle());
+        values.put(KEY_COMMENTAIRES,photo.get_commentaires());
+        values.put(KEY_PHOTOURI,photo.get_photouri());
+
+        return db.update(TABLE_PHOTO, values, KEY_ID+"=?", new String[]{String.valueOf(photo.get_id())});
     }
 
     public void deletePhoto(Photo photo){

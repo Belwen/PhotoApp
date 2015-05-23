@@ -3,6 +3,9 @@ package com.example.marcoaliasketaz.photoapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -19,17 +23,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity implements OnMapReadyCallback {
+public class MainActivity extends ActionBarActivity implements OnMapReadyCallback{
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     MapFragment mMapFragment;
     GoogleMap googleMap;
     Uri imgURI;
     DBHandler dbhandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,7 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
 
         if (id == R.id.action_photo) {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(cameraIntent,REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
             return true;
         }
         if (id == R.id.action_galerie) {
@@ -85,18 +91,18 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
                 imgURI=getImageUri(getApplicationContext(),imageBitmap);
             }
 
-            //création de la photo
             Date _date=new Date();
-            Localisation localisation = new Localisation(getApplicationContext());
-            Photo photo = new Photo(1,localisation.get_latitude(), localisation.get_longitude(),
-                    localisation.get_orientation(),_date,"libelle","commentaires",String.valueOf(imgURI));
-            dbhandler.createPhoto(photo);
+            GPSTracker gps = new GPSTracker(this);
 
-            //Ajout du marker sur le plan
-            Toast.makeText(getApplicationContext(),"photo",Toast.LENGTH_SHORT);
-            googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(photo.get_latitude(),photo.get_longitude()))
-                    .title(photo.get_libelle()));
+            //cree photo
+            Photo photo = new Photo(1,gps.getLatitude(), gps.getLongitude(),
+                    gps.getOrientation(),_date,"","",String.valueOf(imgURI));
+            int id=dbhandler.createPhoto(photo);
+
+            //lance detailActivity pour changer libelle et commentaire
+            Intent i = new Intent(this, DetailsActivity.class);
+            i.putExtra("id",id);
+            startActivity(i);
         }
     }
 
@@ -116,9 +122,15 @@ public class MainActivity extends ActionBarActivity implements OnMapReadyCallbac
         }
     }
 
+
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap=map;
         afficherMarker();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
     }
 }

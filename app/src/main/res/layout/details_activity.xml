@@ -6,15 +6,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:layout_gravity="center"
-        android:scaleType="fitCenter" />
+        android:scaleType="centerCrop" />
 
     <EditText
         android:id="@+id/libelle"
@@ -22,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
-        android:textColor="#fff"
         android:textSize="20dp"
         android:hint="Libelle"
         android:layout_margin="10dp"
@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
-        android:textColor="#fff"
         android:textSize="20dp"
         android:hint="Commentaires"
         android:layout_margin="10dp"
@@ -45,7 +44,6 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:padding="10dp"
-    android:textColor="#fff"
     android:textSize="20dp"
     android:hint="Photo prise le ... à Lyon"
         android:layout_margin="10dp"/>
@@ -53,6 +51,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btnSave"
         android:text="Enregistrer"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"/>

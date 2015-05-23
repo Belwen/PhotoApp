@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ public class DetailsActivity extends ActionBarActivity {
     EditText commentairesTextView;
     TextView dateLieu ;
 
+    Button btnSave;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +51,18 @@ public class DetailsActivity extends ActionBarActivity {
         dateLieu=(TextView) findViewById(R.id.date);
         //todo : changer "a lyon" par la bonne ville = voir localisation
         dateLieu.setText("Photo prise le "+photoAffichee.get_date()+" a Lyon");
+
+        btnSave=(Button)findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                photoAffichee.set_commentaires(String.valueOf(commentairesTextView.getText()));
+                photoAffichee.set_libelle(String.valueOf(libelleTextView.getText()));
+                db.updatePhoto(photoAffichee);
+                finish();
+            }
+        });
+
     }
 
     @Override
