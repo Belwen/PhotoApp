@@ -41,15 +41,15 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        db.execSQL("CREATE TABLE "+TABLE_PHOTO+"("+
-                        KEY_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                        KEY_LATITUDE+" DOUBLE,"+
-                        KEY_LONGITUDE+" DOUBLE,"+
-                        KEY_ORIENTATION+" DOUBLE,"+
-                        KEY_DATE+" DATE,"+
-                        KEY_LIBELLE+" TEXT,"+
-                        KEY_COMMENTAIRES+ " TEXT,"+
-                        KEY_PHOTOURI+" TEXT)"
+        db.execSQL("CREATE TABLE " + TABLE_PHOTO + "(" +
+                        KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        KEY_LATITUDE + " DOUBLE," +
+                        KEY_LONGITUDE + " DOUBLE," +
+                        KEY_ORIENTATION + " DOUBLE," +
+                        KEY_DATE + " DATE," +
+                        KEY_LIBELLE + " TEXT," +
+                        KEY_COMMENTAIRES + " TEXT," +
+                        KEY_PHOTOURI + " TEXT)"
         );
     }
 
@@ -76,7 +76,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public List<Photo> getAllPhotos(){
-        List<Photo> photos = new ArrayList<Photo>();
+        List<Photo> photos = new ArrayList<>();
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PHOTO, null);
@@ -88,6 +88,28 @@ public class DBHandler extends SQLiteOpenHelper {
         } while (cursor.moveToNext());
 
         return photos;
+    }
+
+    public Photo getPhoto(int id){
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PHOTO + " WHERE id=" + String.valueOf(id), null);
+        Photo photo;
+        if (cursor.moveToFirst()){
+             photo = new Photo(cursor.getInt(0),cursor.getDouble(1),cursor.getDouble(2),cursor.getDouble(3), toDate(cursor.getString(4)),
+                    cursor.getString(5),cursor.getString(6),cursor.getString(7));
+        }
+        else{
+            photo=null;
+        }
+
+        return photo;
+    }
+
+    public void deletePhoto(Photo photo){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_PHOTO, KEY_ID+"=?", new String[]{String.valueOf(photo.get_id())});
+        db.close();
     }
 
     public Date toDate(String date){

@@ -10,28 +10,52 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:scaleType="fitCenter" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/libelle"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
         android:textColor="#fff"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:hint="Libelle"
+        android:layout_margin="10dp"
+        android:inputType="textCapWords" />
+    <EditText
+        android:id="@+id/commentaire"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:hint="Commentaires"
+        android:layout_margin="10dp"
+        android:inputType="textCapSentences" />
 
     <TextView
-        android:id="@+id/description"
+    android:id="@+id/date"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:padding="10dp"
+    android:textColor="#fff"
+    android:textSize="20dp"
+    android:hint="Photo prise le ... à Lyon"
+        android:layout_margin="10dp"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Enregistrer"
         android:layout_gravity="center_horizontal"
-        android:padding="10dp"
-        android:textColor="#fff"
-        android:textSize="20dp" />
+        android:layout_margin="15dp"/>
 
 </LinearLayout>
 </ScrollView>

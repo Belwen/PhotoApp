@@ -10,26 +10,7 @@
     <string name="title_activity_main">Photos</string>
     <string name="title_activity_gallery">Gallerie Photos</string>
     <string name="title_activity_details">Détails Photo</string>
-
-
-    <string-array name="image_ids">
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_3</item>
-        <item>@drawable/image_4</item>
-        <item>@drawable/image_5</item>
-        <item>@drawable/image_6</item>
-        <item>@drawable/image_7</item>
-        <item>@drawable/image_8</item>
-        <item>@drawable/image_9</item>
-        <item>@drawable/image_1</item>
-        <item>@drawable/image_2</item>
-        <item>@drawable/image_3</item>
-        <item>@drawable/image_4</item>
-        <item>@drawable/image_5</item>
-        <item>@drawable/image_6</item>
-        <item>@drawable/image_7</item>
-        <item>@drawable/image_8</item>
-        <item>@drawable/image_9</item>
-    </string-array>
+<string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyCwI6vy7HXoTG1HPtNBYO_37BzN95NXRAk
+    </string>
 </resources>

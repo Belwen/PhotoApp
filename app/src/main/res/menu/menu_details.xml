@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:photoApp="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.marcoaliasketaz.photoapp.ContainerActivity">
+
+    <item android:id="@+id/delete"
+        android:title="Supprimer"
+        photoApp:showAsAction="never"/>
+</menu>

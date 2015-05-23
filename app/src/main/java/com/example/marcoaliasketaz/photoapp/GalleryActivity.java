@@ -30,6 +30,10 @@ public class GalleryActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
+        initGUI();
+    }
+
+    public void initGUI(){
         gridView = (GridView) findViewById(R.id.gridView);
         gridAdapter = new GridViewAdapter(this, R.layout.grid_item_layout, db.getAllPhotos());
         gridView.setAdapter(gridAdapter);
@@ -38,17 +42,18 @@ public class GalleryActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Photo photo = (Photo) parent.getItemAtPosition(position);
 
-                //Create intent
+                //lance detailsActivity en passant l'id de la photo
                 Intent intent = new Intent(GalleryActivity.this, DetailsActivity.class);
-                intent.putExtra("title", photo.get_libelle());
-                intent.putExtra("image", photo.get_photouri());
-                intent.putExtra("decription",photo.get_commentaires());
-
-                //Start details activity
+                int aaa = photo.get_id();
+                intent.putExtra("id", aaa);
                 startActivity(intent);
             }
         });
     }
-
+    @Override
+    public void onResume(){
+        super.onResume();
+        initGUI();
+    }
 
 }
